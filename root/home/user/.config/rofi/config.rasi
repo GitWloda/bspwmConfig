@@ -1,0 +1,26 @@
+// https://manpages.ubuntu.com/manpages/jammy/man5/rofi-theme.5.html
+
+@import "~/.cache/wal/colors-rofi-dark.rasi"
+
+* {
+    font: "IosevkaTerm Nerd Font Bold 14";
+}
+
+window {
+	background-color: @foreground;
+	padding: 3;
+    width: 23%;
+}
+
+inputbar, element {
+    padding: 7px;
+}
+
+entry {
+    placeholder: none;
+}
+
+
+listview {
+    scrollbar: false;
+}
