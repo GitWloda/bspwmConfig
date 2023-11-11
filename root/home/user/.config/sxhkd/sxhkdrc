@@ -134,3 +134,16 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+XF86MonBrightnessDown
+	doas brightnessControllWDriver.sh D && notify-send $(doas brightnessControllWDriver.sh G)
+XF86MonBrightnessUp
+	doas brightnessControllWDriver.sh U && notify-send $(doas brightnessControllWDriver.sh G)
+XF86AudioMute
+	pactl set-sink-mute 0 toggle && pactl play-sample audio-volume-change
+XF86AudioLowerVolume
+	pactl set-sink-volume 0 -5% && pactl play-sample audio-volume-change
+XF86AudioRaiseVolume
+	pactl set-sink-volume 0 +5% && pactl play-sample audio-volume-change
+XF86AudioMicMute
+	pactl set-source-mute 1 toggle && pactl play-sample audio-volume-change
