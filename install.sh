@@ -24,4 +24,5 @@ shaur -S ueberzugpp yazi-git
 
 #install rest
 echo "install rest of rice"
+sudo pacman -S yazi ffmpegthumbnailer unarchiver jq poppler fd ripgrep fzf zoxide
 shaur -S battop gotop rog-control-center ttf-ubraille nchat 

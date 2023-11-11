@@ -23,7 +23,6 @@ source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 #alias ls='ls --color=auto'
 alias dc="cd"
 alias ls='exa --icons'
-alias ..='cd ..'
 alias lsa='ls --color=auto -a'
 alias lsl='ls -w1'
 alias lsla='lsa -w1'
@@ -34,6 +33,9 @@ alias diral='dira -w1'
 alias rmrf='rm -rf'
 alias vim="nvim"
 alias pacman="doas pacman"
+alias gpuR="prime-run"
+alias whatsapp="nchat"
+alias bor="git commit -m "$1" && git add . && git push"
 
 ex ()
 {
@@ -50,7 +52,7 @@ ex ()
       *.zip)       unzip $1     ;;
       *.Z)         uncompress $1;;
       *.7z)        7z x $1      ;;
-      *.deb)       ar x $1      ;;
+      *.deb)       ar x $1     f ;;
       *.tar.xz)    tar xf $1    ;;
       *.tar.zst)   unzstd $1    ;;      
       *)           echo "'$1' cannot be extracted via ex()" ;;
@@ -60,7 +62,7 @@ ex ()
   fi
 }
 
-e () {
+f () {
     local var=$(fd . --type f --hidden | sk --preview "bat --theme=OneHalfDark --color=always {}" --preview-window noborder)
     if [ "$var" ]; then nvim "$var"; fi
 }
