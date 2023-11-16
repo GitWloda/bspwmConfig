@@ -8,6 +8,6 @@ elif [ $1 = U ]; then
 		sh -c 'echo $(($(cat /sys/class/backlight/nvidia_wmi_ec_backlight/brightness)+5)) > /sys/class/backlight/nvidia_wmi_ec_backlight/brightness'
 	fi
 elif [ $1 = G ]; then
-	echo $light
+	echo "LUM: $light"
 fi
 

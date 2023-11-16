@@ -124,26 +124,36 @@ super + ctrl + shift + space
 #
 
 # expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+super + shift + {h,j,k,l}
+	bspc node -z {left -20 0 || bspc node -z right -20 0, \
+                bottom 0 20 || bspc node -z top 0 20,\
+                top 0 -20 || bspc node -z bottom 0 -20,\
+                right 20 0 || bspc node -z left 20 0}
+super + shift + {Left, Down, UP, Right}
+	bspc node -z {left -20 0 || bspc node -z right -20 0, \
+                bottom 0 20 || bspc node -z top 0 20,\
+                top 0 -20 || bspc node -z bottom 0 -20,\
+                right 20 0 || bspc node -z left 20 0}
 
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
+# keybinding FN keys
 XF86MonBrightnessDown
 	doas brightnessControllWDriver.sh D && notify-send $(doas brightnessControllWDriver.sh G)
 XF86MonBrightnessUp
 	doas brightnessControllWDriver.sh U && notify-send $(doas brightnessControllWDriver.sh G)
 XF86AudioMute
-	pactl set-sink-mute 0 toggle && pactl play-sample audio-volume-change
+	pactl set-sink-mute 0 toggle && pactl play-sample audio-volume-change && notify-send "AUX: $(pactl list sinks | grep '^[[:space:]]Muto:')"
 XF86AudioLowerVolume
-	pactl set-sink-volume 0 -5% && pactl play-sample audio-volume-change
+	pactl set-sink-volume 0 -10% && pactl play-sample audio-volume-change && notify-send "VOL: $(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
+super + XF86AudioLowerVolume
+	pactl set-sink-volume 0 -5% && pactl play-sample audio-volume-change && notify-send "VOL: $(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
+	
 XF86AudioRaiseVolume
-	pactl set-sink-volume 0 +5% && pactl play-sample audio-volume-change
+	pactl set-sink-volume 0 +10% && pactl play-sample audio-volume-change && notify-send "VOL: $(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
+super + XF86AudioRaiseVolume
+	pactl set-sink-volume 0 +5% && pactl play-sample audio-volume-change && notify-send "VOL: $(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
 XF86AudioMicMute
-	pactl set-source-mute 1 toggle && pactl play-sample audio-volume-change
+	pactl set-source-mute 1 toggle && pactl play-sample audio-volume-change && notify-send "mic: $(pactl list sources | grep '^[[:space:]]Muto:' | tail -1)"
