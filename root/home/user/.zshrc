@@ -35,6 +35,7 @@ alias vim="nvim"
 alias pacman="doas pacman"
 alias gpuR="prime-run"
 alias whatsapp="nchat"
+#alias paci="pacman -Suyy && shaur -U && pacman -Rcns $(pacman -Qqtd)"
 
 ex ()
 {
